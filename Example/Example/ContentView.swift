@@ -15,27 +15,39 @@ class NavigationModel: ObservableObject {
 struct ContentView: View {
     @StateObject private var navigationModel = NavigationModel()
     var body: some View {
-        NavigationStack(path: $navigationModel.path) {
-            BookCategoryView()
-                .environmentObject(navigationModel)
+        VStack {
+            NavigationStack(path: $navigationModel.path) {
+                ViewA() // Root
+                    .environmentObject(navigationModel)
+            }
+            .navigationViewStyle(.stack)
+            VStack(alignment: .leading) {
+                Text("Navigation stack")
+                    .bold()
+                Divider()
+                ForEach(navigationModel.path.resolvedItems.indices, id: \.self) { index in
+                    Text(String(reflecting: navigationModel.path.resolvedItems[index]))
+                    Divider()
+                }
+            }
+            .padding()
         }
-        .navigationViewStyle(.stack)
     }
 }
 
-struct BookCategoryView: View {
+struct ViewA: View {
     @EnvironmentObject var navigationModel: NavigationModel
     var body: some View {
         List(BookCategory.allCases) { category in
             Button(action: {
-                navigationModel.path.append(category)
+                navigationModel.path.append(BookCategory.new)
             }, label: {
                 HStack {
                     Image(uiImage: category.image ?? UIImage())
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
-                    Text(category.title)
+                    Text("Go to B")
                         .foregroundColor(.black)
                     Spacer()
                     Image(systemName: "chevron.right")
@@ -47,63 +59,156 @@ struct BookCategoryView: View {
             })
         }
         .navigationDestination(type: BookCategory.self, destination: { category in
-            BookListView(category: category)
+            ViewB(category: category)
                 .environmentObject(navigationModel)
         })
         .navigationDestination(type: Book.self, destination: { book in
-            BookDetailView(book: book)
+            ViewC(book: book)
                 .environmentObject(navigationModel)
         })
-        .navigationTitle("Book categories")
+        .navigationDestination(type: String.self, destination: { path in
+            ViewD(path: path)
+                .environmentObject(navigationModel)
+        })
+        .navigationDestination(type: Int.self, destination: { intPath in
+            ViewE(intPath: intPath)
+                .environmentObject(navigationModel)
+        })
+        .navigationTitle("View A")
     }
 }
 
-struct BookListView: View {
+struct ViewB: View {
     var category: BookCategory
     @EnvironmentObject var navigationModel: NavigationModel
     var body: some View {
-        List(category.books) { book in
+        VStack(spacing: 24) {
             Button(action: {
-                navigationModel.path.append(book)
+                navigationModel.path.append(Book.mock)
             }, label: {
-                VStack(alignment: .leading) {
-                    Text(book.name ?? "")
-                        .bold()
-                        .font(.title2)
-                    Text(book.author ?? "")
-                        .italic()
-                }
-                .padding()
-            })
-        }
-        .navigationTitle(category.title)
-    }
-}
-
-struct BookDetailView: View {
-    var book: Book
-    @EnvironmentObject var navigationModel: NavigationModel
-    var body: some View {
-        VStack {
-            Text(book.name ?? "")
-            Button(action: {
-                navigationModel.path.popToRoot()
-            }, label: {
-                Text("Pop to root")
+                Text("Go to C")
             })
             Button(action: {
                 navigationModel.path.pop()
             }, label: {
                 Text("Pop")
             })
-        
+            Button(action: {
+                navigationModel.path.popToRoot()
+            }, label: {
+                Text("Pop to root")
+            })
+            Spacer()
+            HStack {
+                Spacer()
+            }
         }
-        .navigationTitle(book.name ?? "Book detail")
+        .navigationTitle("View B")
+    }
+}
+
+struct ViewC: View {
+    var book: Book
+    @EnvironmentObject var navigationModel: NavigationModel
+    var body: some View {
+        VStack(spacing: 24) {
+            Button(action: {
+                navigationModel.path.append("ViewD")
+            }, label: {
+                Text("Go to D")
+            })
+            Button(action: {
+                navigationModel.path.pop()
+            }, label: {
+                Text("Pop")
+            })
+            Button(action: {
+                navigationModel.path.popToRoot()
+            }, label: {
+                Text("Pop to root")
+            })
+
+            Spacer()
+            HStack {
+                Spacer()
+            }
+        }
+        .padding()
+        .navigationTitle("View C")
+    }
+}
+
+struct ViewD: View {
+    var path: String
+    @EnvironmentObject var navigationModel: NavigationModel
+    var body: some View {
+        VStack(spacing: 24) {
+            Button(action: {
+                navigationModel.path.append(1)
+            }, label: {
+                Text("Go to E")
+            })
+            Button(action: {
+                navigationModel.path.popTo(item: BookCategory.new)
+            }, label: {
+                Text("Pop to B")
+            })
+            Button(action: {
+                navigationModel.path.pop()
+            }, label: {
+                Text("Pop")
+            })
+            Button(action: {
+                navigationModel.path.popToRoot()
+            }, label: {
+                Text("Pop to root")
+            })
+            Spacer()
+            HStack {
+                Spacer()
+            }
+        }
+        .navigationTitle("View D")
+    }
+}
+
+
+struct ViewE: View {
+    var intPath: Int
+    @EnvironmentObject var navigationModel: NavigationModel
+    var body: some View {
+        VStack(spacing: 24) {
+            Button(action: {
+                navigationModel.path.popTo(item: Book.mock)
+            }, label: {
+                Text("Pop to C")
+            })
+            Button(action: {
+                navigationModel.path.popTo(item: "ViewD")
+            }, label: {
+                Text("Pop to ViewD path")
+            })
+            Button(action: {
+                navigationModel.path.pop()
+            }, label: {
+                Text("Pop")
+            })
+            Button(action: {
+                navigationModel.path.popToRoot()
+            }, label: {
+                Text("Pop to root")
+            })
+            Spacer()
+            HStack {
+                Spacer()
+            }
+        }
+        .navigationTitle("View E")
     }
 }
 
 enum BookCategory: String, CaseIterable, Identifiable, Hashable, Codable {
-    var id: String { self.rawValue }
+    var id: String { String(describing: self) }
     case new
     case favorite
     case reading
@@ -124,44 +229,14 @@ enum BookCategory: String, CaseIterable, Identifiable, Hashable, Codable {
         case .complete: UIImage(systemName: "books.vertical.fill")
         }
     }
-
-    var books: [Book] {
-        [
-            Book.mock,
-            Book.mock,
-            Book.mock,
-            Book.mock,
-            Book.mock,
-        ]
-    }
 }
 
 struct Book: Codable, Identifiable, Hashable {
     var id: String
-    var name: String?
-    var author: String?
-    var page: Int?
-    
-    static var mock: Book {
-        mockBooks.randomElement() ?? Book(id: UUID().uuidString)
-    }
-}
-
-extension Book {
-    static var mockBooks: [Book] {
-        [
-            Book(id: UUID().uuidString, name: "To Kill a Mockingbird", author: "Harper Lee", page: 281),
-            Book(id: UUID().uuidString, name: "1984", author: "George Orwell", page: 328),
-            Book(id: UUID().uuidString, name: "The Great Gatsby", author: "F. Scott Fitzgerald", page: 180),
-            Book(id: UUID().uuidString, name: "Moby Dick", author: "Herman Melville", page: 635),
-            Book(id: UUID().uuidString, name: "Pride and Prejudice", author: "Jane Austen", page: 279),
-            Book(id: UUID().uuidString, name: "The Catcher in the Rye", author: "J.D. Salinger", page: 277),
-            Book(id: UUID().uuidString, name: "The Hobbit", author: "J.R.R. Tolkien", page: 310),
-            Book(id: UUID().uuidString, name: "Fahrenheit 451", author: "Ray Bradbury", page: 249),
-            Book(id: UUID().uuidString, name: "Brave New World", author: "Aldous Huxley", page: 268),
-            Book(id: UUID().uuidString, name: "The Odyssey", author: "Homer", page: 500)
-        ]
-    }
+    var name: String
+    var author: String
+    var page: Int
+    static var mock: Book = Book(id: UUID().uuidString, name: "To Kill a Mockingbird", author: "Harper Lee", page: 281)
 }
 
 

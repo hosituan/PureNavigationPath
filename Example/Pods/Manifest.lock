@@ -10,7 +10,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PureNavigationPath:
-    :commit: 4babc090e18d84b44bf1378566bd957acd1e9a2a
+    :commit: bfb648f9de36a81ec206673abeb95d3a2f5fb496
     :git: https://github.com/hosituan/PureNavigationPath.git
 
 SPEC CHECKSUMS:
