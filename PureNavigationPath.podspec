@@ -9,34 +9,20 @@
 Pod::Spec.new do |s|
   s.name             = 'PureNavigationPath'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of PureNavigationPath.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'A pure usage of NavigationPath in SwiftUI'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+PureNavigationPath is a Swift library designed to simplify navigation in iOS applications. It provides a straightforward and intuitive API for managing and visualizing navigation paths, making it easier to handle complex navigation flows in your app. With PureNavigationPath, you can effortlessly manage navigation states, track user progress, and implement custom transitions with minimal code. Ideal for developers looking to enhance their app's navigation experience.
                        DESC
 
   s.homepage         = 'https://github.com/justico/PureNavigationPath'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'justico' => 'tuansiho@kms-technology.com' }
-  s.source           = { :git => 'https://github.com/justico/PureNavigationPath.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { 'hosituan' => 'hosituan.work@gmail.com' }
+  s.source           = { :git => 'https://github.com/hosituan/PureNavigationPath.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://www.linkedin.com/in/hosituan/'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '16.0'
 
   s.source_files = 'PureNavigationPath/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'PureNavigationPath' => ['PureNavigationPath/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
