@@ -3,13 +3,13 @@ import Foundation
 
 public extension NavigationPath {
     static var resolvedItemTypes: [String: Codable.Type] = [:]
-    public static func register<T: Codable>(_ types: T.Type...) {
+    static func register<T: Codable>(_ types: T.Type...) {
         types.forEach { type in
             resolvedItemTypes[String(describing: type)] = type
         }
     }
     
-    public var resolvedItems: [Codable] {
+    var resolvedItems: [Codable] {
         guard let codable = self.codable,
               let json = try? JSONEncoder().encode(codable),
               let containner = try? JSONDecoder().decode(NavigationItemContainer.self, from: json)
@@ -17,7 +17,7 @@ public extension NavigationPath {
         return containner.items
     }
     
-    public mutating func popTo(item: Codable) {
+    mutating func popTo(item: Codable) {
         if let index = resolvedItems.firstIndex(where: {
             compare(item, $0)
         }) {
@@ -25,8 +25,12 @@ public extension NavigationPath {
         }
     }
     
-    public mutating func popToRoot() {
+    mutating func popToRoot() {
         self.removeLast(self.count)
+    }
+
+    mutating func pop() {
+        self.removeLast()
     }
     
     private func compare(_ item1: Codable, _ item2: Codable) -> Bool {

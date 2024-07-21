@@ -10,11 +10,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   PureNavigationPath:
-    :commit: a4ead3b84b380f4da681547010d8595ef8320221
+    :commit: 4babc090e18d84b44bf1378566bd957acd1e9a2a
     :git: https://github.com/hosituan/PureNavigationPath.git
 
 SPEC CHECKSUMS:
-  PureNavigationPath: b997c331fa6487419f0b3c9cd9e751f5c8992b7d
+  PureNavigationPath: e12411290e950be789da1bac055c2169f4db4389
 
 PODFILE CHECKSUM: af95a2b68f7ec7bc055bcaadbf33507781e319d5
 
