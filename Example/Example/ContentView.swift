@@ -149,7 +149,7 @@ struct ViewD: View {
                 Text("Go to E")
             })
             Button(action: {
-                navigationModel.path.popTo(item: BookCategory.new)
+                navigationModel.path.pop(to: BookCategory.new)
             }, label: {
                 Text("Pop to B")
             })
@@ -179,12 +179,12 @@ struct ViewE: View {
     var body: some View {
         VStack(spacing: 24) {
             Button(action: {
-                navigationModel.path.popTo(item: Book.mock)
+                navigationModel.path.pop(to: Book.mock)
             }, label: {
                 Text("Pop to C")
             })
             Button(action: {
-                navigationModel.path.popTo(item: "ViewD")
+                navigationModel.path.pop(to: "ViewD")
             }, label: {
                 Text("Pop to ViewD path")
             })
@@ -194,6 +194,7 @@ struct ViewE: View {
                 Text("Pop")
             })
             Button(action: {
+                print(navigationModel.path.resolvedItems)
                 navigationModel.path.popToRoot()
             }, label: {
                 Text("Pop to root")

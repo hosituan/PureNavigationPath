@@ -17,7 +17,7 @@ public extension NavigationPath {
         return containner.items
     }
     
-    mutating func popTo(item: Codable) {
+    mutating func pop(to item: Codable) {
         if let index = resolvedItems.firstIndex(where: {
             compare(item, $0)
         }) {

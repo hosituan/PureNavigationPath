@@ -68,7 +68,7 @@ let pathInteger = 100
 path.append(pathInteger)
 ```
 
-## Pop a View
+### Pop a View
 Dismiss top view of navigation
 ```swift
 path.pop()
@@ -77,15 +77,18 @@ path.pop()
 ### Pop to a Specific View
 Pop to any View based on the original codable appended.
 ```swift
-path.popTo(item: book)
-path.popTo(item: category)
-path.popTo(item: "examplePath")
-path.popTo(item: 100)
+path.pop(to: book)
+path.pop(to: category)
+path.pop(to: "examplePath")
+path.pop(to: 100)
 ```
 
 ### Pop to Root
 ```swift
 path.popToRoot()
+/*
+[1, "ViewD", Example.Book(id: "253D9737-51B7-44FF-A3F2-55C0ADF0AF35", name: "To Kill a Mockingbird", author: "Harper Lee", page: 281), Example.BookCategory.new]
+ */
 ```
 
 ### Get current navigation stack
