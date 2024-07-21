@@ -1,0 +1,6 @@
+framework module PureNavigationPath {
+  umbrella header "PureNavigationPath-umbrella.h"
+
+  export *
+  module * { export * }
+}

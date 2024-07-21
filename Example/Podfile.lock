@@ -1,0 +1,21 @@
+PODS:
+  - PureNavigationPath (0.1.0)
+
+DEPENDENCIES:
+  - PureNavigationPath (from `https://github.com/hosituan/PureNavigationPath.git`)
+
+EXTERNAL SOURCES:
+  PureNavigationPath:
+    :git: https://github.com/hosituan/PureNavigationPath.git
+
+CHECKOUT OPTIONS:
+  PureNavigationPath:
+    :commit: a4ead3b84b380f4da681547010d8595ef8320221
+    :git: https://github.com/hosituan/PureNavigationPath.git
+
+SPEC CHECKSUMS:
+  PureNavigationPath: b997c331fa6487419f0b3c9cd9e751f5c8992b7d
+
+PODFILE CHECKSUM: af95a2b68f7ec7bc055bcaadbf33507781e319d5
+
+COCOAPODS: 1.15.2

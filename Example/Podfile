@@ -1,14 +1,11 @@
-use_frameworks!
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
 
-platform :ios, '10.0'
+target 'Example' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
 
-target 'PureNavigationPath_Example' do
-  pod 'PureNavigationPath', :path => '../'
+  # Pods for Example
+  pod 'PureNavigationPath', :git => 'https://github.com/hosituan/PureNavigationPath.git'
 
-  target 'PureNavigationPath_Tests' do
-    inherit! :search_paths
-
-    pod 'Quick', '~> 2.2.0'
-    pod 'Nimble', '~> 10.0.0'
-  end
 end

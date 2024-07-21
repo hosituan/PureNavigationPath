@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 PureNavigationPath is a Swift library designed to simplify navigation in iOS applications. It provides a straightforward and intuitive API for managing and visualizing navigation paths, making it easier to handle complex navigation flows in your app. With PureNavigationPath, you can effortlessly manage navigation states, track user progress, and implement custom transitions with minimal code. Ideal for developers looking to enhance their app's navigation experience.
                        DESC
 
-  s.homepage         = 'https://github.com/justico/PureNavigationPath'
+  s.homepage         = 'https://github.com/hosituan/PureNavigationPath'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'hosituan' => 'hosituan.work@gmail.com' }
