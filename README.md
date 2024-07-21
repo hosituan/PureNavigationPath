@@ -1,4 +1,4 @@
-# PureNavigationPath
+# SwiftUI PureNavigationPath
 
 [![Version](https://img.shields.io/cocoapods/v/PureNavigationPath.svg?style=flat)](https://cocoapods.org/pods/PureNavigationPath)
 [![License](https://img.shields.io/cocoapods/l/PureNavigationPath.svg?style=flat)](https://cocoapods.org/pods/PureNavigationPath)
@@ -69,7 +69,7 @@ path.append(pathInteger)
 ```
 
 ### Pop a View
-Dismiss top view of navigation
+Dismiss top view of navigation.
 ```swift
 path.pop()
 ```
@@ -86,19 +86,27 @@ path.pop(to: 100)
 ### Pop to Root
 ```swift
 path.popToRoot()
-/*
-[1, "ViewD", Example.Book(id: "253D9737-51B7-44FF-A3F2-55C0ADF0AF35", name: "To Kill a Mockingbird", author: "Harper Lee", page: 281), Example.BookCategory.new]
- */
 ```
 
 ### Get current navigation stack
 ```swift
 print(path.resolvedItems())
+/*
+[
+    1,
+    "ViewD", 
+    Example.Book(id: "253D9737-51B7-44FF-A3F2-55C0ADF0AF35", name: "To Kill a Mockingbird", author: "Harper Lee", page: 281), 
+    Example.BookCategory.new
+]
+ */
 ```
 
 ## Author
 
-hosituan, hosituan.work@gmail.com
+Contact for work.
+- [Github](https://github.com/hosituan)
+- [Email](https://github.com/hosituan)
+- [LinkedIn](https://www.linkedin.com/in/hosituan/)
 
 ## License
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PureNavigationPath'
-  s.version          = '0.1.0'
+  s.version          = '1.0.0'
   s.summary          = 'A pure usage of NavigationPath in SwiftUI'
 
   s.description      = <<-DESC
@@ -16,7 +16,6 @@ PureNavigationPath is a Swift library designed to simplify navigation in iOS app
                        DESC
 
   s.homepage         = 'https://github.com/hosituan/PureNavigationPath'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'hosituan' => 'hosituan.work@gmail.com' }
   s.source           = { :git => 'https://github.com/hosituan/PureNavigationPath.git', :tag => s.version.to_s }
