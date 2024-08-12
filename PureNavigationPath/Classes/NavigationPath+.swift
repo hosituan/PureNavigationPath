@@ -21,7 +21,7 @@ public extension NavigationPath {
         if let index = resolvedItems.firstIndex(where: {
             compare(item, $0)
         }) {
-            self.removeLast(index)
+            self.removeLast(self.count - 1 - index)
         }
     }
     
@@ -41,12 +41,18 @@ public extension NavigationPath {
     
     private struct NavigationItemContainer: Decodable {
         let items: [Codable]
+        init(items: [Codable]) {
+            self.items = items
+        }
         init(from decoder: Decoder) throws {
             var container = try decoder.unkeyedContainer()
             var items = [Codable]()
             let appName = (Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "") + "."
+            let appNameSnakeCase = appName.replacingOccurrences(of: "-", with: "_")
             while !container.isAtEnd {
-                let typeString = try container.decode(String.self).replacingOccurrences(of: appName, with: "")
+                let typeString = try container.decode(String.self)
+                    .replacingOccurrences(of: appName, with: "")
+                    .replacingOccurrences(of: appNameSnakeCase, with: "")
                 let jsonString = try container.decode(String.self)
                 if let jsonData = jsonString.data(using: .utf8) {
                     if let itemType = NavigationPath.resolvedItemTypes[typeString] {

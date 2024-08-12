@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PureNavigationPath'
-  s.version          = '1.0.0'
+  s.version          = '1.1.0'
   s.summary          = 'A pure usage of NavigationPath in SwiftUI'
 
   s.description      = <<-DESC
